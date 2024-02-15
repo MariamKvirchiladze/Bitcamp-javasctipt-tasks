@@ -24,7 +24,6 @@
 const prompt = require(`prompt-sync`)();
 
 function isValidDate(month, day, year) {
-  month = month - 1; // Adjust month to 0-based index for Date object
   const date = new Date(year, month, day);
   return !isNaN(date.getTime()) && date.getMonth() === month;
 }
@@ -54,13 +53,21 @@ function getValidDate() {
       let [month, day, year] = user_input.includes("/")
         ? user_input.split("/")
         : user_input.split(" ");
+      if (month.length > 2) {
+        for (let i = 0; i < months.length; i++) {
+          if (month == months[i]) {
+            month = i + 1;
+          }
+        }
+      } else {
+        month = parseInt(month);
+      }
 
-      month = parseInt(month);
       day = parseInt(day);
       year = parseInt(year);
 
       if (isValidDate(month, day, year)) {
-        return `${year}-${(month + 1).toString().padStart(2, "0")}-${day
+        return `${year}-${month.toString().padStart(2, "0")}-${day
           .toString()
           .padStart(2, "0")}`;
       } else {
