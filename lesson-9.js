@@ -21,63 +21,93 @@
 // $ Date: 8/9/1636
 // $ 1636-08-09
 
-const prompt = require(`prompt-sync`)();
+// const prompt = require(`prompt-sync`)();
 
-function isValidDate(month, day, year) {
-  const date = new Date(year, month, day);
-  return !isNaN(date.getTime()) && date.getMonth() === month;
+// function isValidDate(month, day, year) {
+//   const date = new Date(year, month, day);
+//   return !isNaN(date.getTime()) && date.getMonth() === month;
+// }
+
+// function getValidDate() {
+//   const months = [
+//     "January",
+//     "February",
+//     "March",
+//     "April",
+//     "May",
+//     "June",
+//     "July",
+//     "August",
+//     "September",
+//     "October",
+//     "November",
+//     "December",
+//   ];
+
+//   while (true) {
+//     const user_input = prompt(
+//       "Enter a date (month-day-year or Month day, year):"
+//     ).replace(",", "");
+
+//     try {
+//       let [month, day, year] = user_input.includes("/")
+//         ? user_input.split("/")
+//         : user_input.split(" ");
+//       if (month.length > 2) {
+//         for (let i = 0; i < months.length; i++) {
+//           if (month == months[i]) {
+//             month = i + 1;
+//           }
+//         }
+//       } else {
+//         month = parseInt(month);
+//       }
+
+//       day = parseInt(day);
+//       year = parseInt(year);
+
+//       if (isValidDate(month, day, year)) {
+//         return `${year}-${month.toString().padStart(2, "0")}-${day
+//           .toString()
+//           .padStart(2, "0")}`;
+//       } else {
+//         console.log("Invalid date. Please enter a valid date.");
+//       }
+//     } catch (error) {
+//       console.log("Invalid format. Please enter a valid date.");
+//     }
+//   }
+// }
+
+// const result = getValidDate();
+// console.log(`Formatted date: ${result}`);
+
+// Retry
+// Say you have a function primitiveMultiply that in 20 percent of cases multiplies two numbers and in the other 80 percent of cases raises an exception of type MultiplicatorUnitFailure. Write a function that wraps this clunky function and just keeps trying until a call succeeds, after which it returns the result.
+
+// Make sure you handle only the exceptions you are trying to handle.
+
+class MultiplicatorUnitFailure extends Error {}
+
+function primitiveMultiply(a, b) {
+  if (Math.random() < 0.2) {
+    return a * b;
+  } else {
+    throw new MultiplicatorUnitFailure("Klunk");
+  }
 }
 
-function getValidDate() {
-  const months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
-
+function reliableMultiply(a, b) {
+  // Your code here.
   while (true) {
-    const user_input = prompt(
-      "Enter a date (month-day-year or Month day, year):"
-    ).replace(",", "");
-
     try {
-      let [month, day, year] = user_input.includes("/")
-        ? user_input.split("/")
-        : user_input.split(" ");
-      if (month.length > 2) {
-        for (let i = 0; i < months.length; i++) {
-          if (month == months[i]) {
-            month = i + 1;
-          }
-        }
-      } else {
-        month = parseInt(month);
-      }
-
-      day = parseInt(day);
-      year = parseInt(year);
-
-      if (isValidDate(month, day, year)) {
-        return `${year}-${month.toString().padStart(2, "0")}-${day
-          .toString()
-          .padStart(2, "0")}`;
-      } else {
-        console.log("Invalid date. Please enter a valid date.");
-      }
+      return primitiveMultiply(a, b);
     } catch (error) {
-      console.log("Invalid format. Please enter a valid date.");
+      if (!(error instanceof MultiplicatorUnitFailure)) {
+        throw error; // rethrow if it's not the expected error
+      }
     }
   }
 }
 
-const result = getValidDate();
-console.log(`Formatted date: ${result}`);
+console.log(reliableMultiply(8, 8));
