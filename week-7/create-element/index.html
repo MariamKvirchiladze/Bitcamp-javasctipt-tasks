@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Paragraph Example</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin: 20px;
+        background-color: aquamarine;
+      }
+
+      #myDiv {
+        border: 1px solid green;
+        padding: 20px;
+        margin-top: 10px;
+      }
+      p {
+        font-size: 48px;
+      }
+      button {
+        margin-top: 20px;
+        padding: 10px;
+        width: 200px;
+        height: 100px;
+        color: black;
+        border-radius: 10%;
+        background-color: lightblue;
+        font-size: 32px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="myDiv"></div>
+    <button onclick="createParagraph()">Create Paragraph</button>
+
+    <script>
+      const paragraphCount = 1;
+      function createParagraph() {
+        const divElement = document.getElementById("myDiv");
+        if (divElement) {
+          const newParagraph = document.createElement("p");
+          newParagraph.textContent = "new paragraph " + paragraphCount;
+          paragraphCount++;
+          divElement.appendChild(newParagraph);
+        } else {
+          console.error("Div element not found!");
+        }
+      }
+    </script>
+  </body>
+</html>
