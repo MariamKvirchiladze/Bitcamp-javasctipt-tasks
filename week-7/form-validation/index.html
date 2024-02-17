@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form Validation Example</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin: 20px;
+      }
+
+      #error-message {
+        color: red;
+        font-size: 24px;
+      }
+      label {
+        font-size: 48px;
+        font-family: sans-serif;
+        color: black;
+      }
+      #inputField {
+        width: 500px;
+        height: 50px;
+        font-size: 36px;
+      }
+      #submit {
+        padding: 10px;
+        width: 200px;
+        height: 100px;
+        color: black;
+        border-radius: 10%;
+        background-color: lightblue;
+        font-size: 32px;
+      }
+      #error-message {
+        font-size: 36px;
+        color: red;
+      }
+      span {
+        padding: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <form onsubmit="validateForm(event)">
+      <label for="inputField">Input Field:</label>
+      <input type="text" id="inputField" />
+      <br /><span id="error-message"></span><br />
+      <input id="submit" type="submit" value="Submit" />
+    </form>
+
+    <script>
+      function validateForm(event) {
+        event.preventDefault();
+        const inputValue = document.getElementById("inputField").value;
+        console.log(inputValue);
+        const errorMessage = document.getElementById("error-message");
+        console.log(errorMessage);
+        if (inputValue.trim() === "") {
+          errorMessage.innerHTML = "Should not be empty";
+        } else {
+          errorMessage.innerHTML = "";
+          alert("Form submitted!");
+        }
+      }
+    </script>
+  </body>
+</html>
