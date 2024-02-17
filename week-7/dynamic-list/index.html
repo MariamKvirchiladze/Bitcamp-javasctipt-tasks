@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dynamic List Example</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      ul {
+        list-style-type: none;
+        padding: 0;
+        display: flex;
+        width: 700px;
+        flex-direction: column;
+      }
+
+      li {
+        margin: 10px 0;
+        font-size: 48px;
+        display: flex;
+        justify-content: space-between;
+      }
+      input {
+        width: 500px;
+        height: 50px;
+        font-size: 36px;
+      }
+
+      button {
+        cursor: pointer;
+        margin-left: 10px;
+        color: black;
+        border-radius: 10%;
+        background-color: lightblue;
+        font-size: 32px;
+      }
+      .inputText {
+        display: flex;
+        justify-content: space-between;
+        width: 700px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="inputText">
+      <input type="text" id="itemInput" placeholder="Enter text" />
+      <button onclick="addItem()">Add Item</button>
+    </div>
+
+    <ul id="itemList"></ul>
+
+    <script>
+      function addItem() {
+        const inputValue = document.getElementById("itemInput").value;
+        if (inputValue) {
+          document.getElementById("itemInput").value = "";
+          const listItem = document.createElement("li");
+          const textSpan = document.createElement("span");
+          textSpan.textContent = inputValue;
+          const deleteButton = document.createElement("button");
+          deleteButton.textContent = "X";
+          deleteButton.onclick = function () {
+            listItem.remove();
+          };
+          listItem.appendChild(textSpan);
+          listItem.appendChild(deleteButton);
+          document.getElementById("itemList").appendChild(listItem);
+        } else {
+          alert("Enter the value");
+        }
+      }
+    </script>
+  </body>
+</html>
