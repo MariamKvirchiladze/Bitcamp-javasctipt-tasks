@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>style change</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin: 20px;
+        background-color: blue;
+      }
+      #myText {
+        font-size: 48px;
+        color: black;
+      }
+      #myButton {
+        padding: 10px;
+        width: 200px;
+        height: 100px;
+        color: black;
+        border-radius: 10%;
+        background-color: lightblue;
+        font-size: 32px;
+      }
+    </style>
+  </head>
+  <body>
+    <p id="myText">This is a sample text.</p>
+    <button id="myButton" onclick="changeColor()">Change Colors</button>
+    <script>
+      function changeColor() {
+        var textElement = document.getElementById("myText");
+        var buttonElement = document.getElementById("myButton");
+        if (textElement && buttonElement) {
+          textElement.style.color = "white";
+          buttonElement.style.backgroundColor = "red";
+          buttonElement.style.color = "white";
+        } else {
+          console.error("Elements not found!");
+        }
+      }
+    </script>
+  </body>
+</html>
