@@ -6,77 +6,141 @@
 // მოაქვს ინფორმაცია API-დან CoinDesk Bitcoin-ის ფასის ინდექსისთვის: https://api.coindesk.com/v1/bpi/currentprice.json , რომელიც აბრუნებს JSON ობიექტს, რომლის თვისებებს შორის არის ბიტკოინის მიმდინარე ფასი, როგორც float. დარწმუნდით, რომ "დაიჭირეთ" ნებისმიერი გამონაკლისი/შეცდომა ინფორმაციის წამოღების დროს:
 // პროგრამამ output-ად უნდა გამოიტანოს USD-ში ბიტკოინის ამჟამინდელი ღირებულება ოთხი თანრიგის ათწილადამდე (მეათასედი).
 
-const axios = require("axios");
+// const axios = require("axios");
 
-async function getBitcoinPrice() {
-  try {
-    const response = await axios.get(
-      "https://api.coindesk.com/v1/bpi/currentprice.json"
-    );
-    const data = response.data;
-    return {
-      USD: parseFloat(data.bpi.USD.rate.replace(",", "")),
-      EUR: parseFloat(data.bpi.EUR.rate.replace(",", "")),
-      GBP: parseFloat(data.bpi.GBP.rate.replace(",", "")),
-    };
-  } catch (error) {
-    console.error("Error occurred:", error.message);
-    return null;
-  }
-}
+// async function getBitcoinPrice() {
+//   try {
+//     const response = await axios.get(
+//       "https://api.coindesk.com/v1/bpi/currentprice.json"
+//     );
+//     const data = response.data;
+//     return {
+//       USD: parseFloat(data.bpi.USD.rate.replace(",", "")),
+//       EUR: parseFloat(data.bpi.EUR.rate.replace(",", "")),
+//       GBP: parseFloat(data.bpi.GBP.rate.replace(",", "")),
+//     };
+//   } catch (error) {
+//     console.error("Error occurred:", error.message);
+//     return null;
+//   }
+// }
 
-async function main() {
-  const readline = require("readline").createInterface({
-    input: process.stdin,
-    output: process.stdout,
-  });
+// async function main() {
+//   const readline = require("readline").createInterface({
+//     input: process.stdin,
+//     output: process.stdout,
+//   });
 
-  console.log("Choose the currency for conversion:");
-  console.log("1. USD");
-  console.log("2. EUR");
-  console.log("3. GBP");
+//   console.log("Choose the currency for conversion:");
+//   console.log("1. USD");
+//   console.log("2. EUR");
+//   console.log("3. GBP");
 
-  readline.question("Enter the currency number: ", async (currencyChoice) => {
-    try {
-      currencyChoice = parseInt(currencyChoice);
-      if (![1, 2, 3].includes(currencyChoice)) {
-        console.log(
-          "Invalid choice. Please enter a valid currency number (1, 2, or 3)."
-        );
-        readline.close();
-        return;
-      }
+//   readline.question("Enter the currency number: ", async (currencyChoice) => {
+//     try {
+//       currencyChoice = parseInt(currencyChoice);
+//       if (![1, 2, 3].includes(currencyChoice)) {
+//         console.log(
+//           "Invalid choice. Please enter a valid currency number (1, 2, or 3)."
+//         );
+//         readline.close();
+//         return;
+//       }
 
-      const currencyMap = { 1: "USD", 2: "EUR", 3: "GBP" };
-      const currency = currencyMap[currencyChoice];
+//       const currencyMap = { 1: "USD", 2: "EUR", 3: "GBP" };
+//       const currency = currencyMap[currencyChoice];
 
-      const bitcoins = parseFloat(
-        await new Promise((resolve) => {
-          readline.question("Enter the desired amount of bitcoins: ", resolve);
-        })
-      );
+//       const bitcoins = parseFloat(
+//         await new Promise((resolve) => {
+//           readline.question("Enter the desired amount of bitcoins: ", resolve);
+//         })
+//       );
 
-      if (isNaN(bitcoins)) {
-        console.log("Invalid input. Please enter a valid number of bitcoins.");
-        readline.close();
-        return;
-      }
+//       if (isNaN(bitcoins)) {
+//         console.log("Invalid input. Please enter a valid number of bitcoins.");
+//         readline.close();
+//         return;
+//       }
 
-      const bitcoinPrices = await getBitcoinPrice();
-      if (bitcoinPrices !== null) {
-        const valueInChosenCurrency = bitcoins * bitcoinPrices[currency];
-        console.log(
-          `The current value of ${bitcoins.toFixed(
-            4
-          )} bitcoins is ${valueInChosenCurrency.toFixed(4)} ${currency}`
-        );
-      }
-    } catch (error) {
-      console.error("Error occurred:", error.message);
-    } finally {
-      readline.close();
-    }
-  });
-}
+//       const bitcoinPrices = await getBitcoinPrice();
+//       if (bitcoinPrices !== null) {
+//         const valueInChosenCurrency = bitcoins * bitcoinPrices[currency];
+//         console.log(
+//           `The current value of ${bitcoins.toFixed(
+//             4
+//           )} bitcoins is ${valueInChosenCurrency.toFixed(4)} ${currency}`
+//         );
+//       }
+//     } catch (error) {
+//       console.error("Error occurred:", error.message);
+//     } finally {
+//       readline.close();
+//     }
+//   });
+// }
 
-main();
+// main();
+
+// Retrieve User Profile: Create a function using Fetch API to retrieve a user's profile information from the server
+
+// function getUserProfile(username) {
+//   const url = `https://api.github.com/users/${username}`;
+
+//   return fetch(url)
+//     .then((response) => {
+//       if (!response.ok) {
+//         throw new Error("Network response was not ok");
+//       }
+//       return response.json();
+//     })
+//     .then((data) => {
+//       return data;
+//     })
+//     .catch((error) => {
+//       console.error("There was a problem fetching the user profile:", error);
+//     });
+// }
+
+// // Example usage:
+// const username = "mariamkvirchiladze";
+// getUserProfile(username).then((profileData) => {
+//   console.log(profileData);
+// });
+
+// Add New Blog Post: Implement a function to add a new blog post using Fetch API, sending the post data to the server.
+
+// function addNewBlogPost(postData) {
+//   const url = "https://jsonplaceholder.typicode.com/posts"; // JSONPlaceholder fake API URL
+
+//   return fetch(url, {
+//     method: "POST",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify(postData),
+//   })
+//     .then((response) => {
+//       if (!response.ok) {
+//         throw new Error("Network response was not ok");
+//       }
+//       return response.json();
+//     })
+//     .then((data) => {
+//       console.log("New blog post added:", data);
+//       return data;
+//     })
+//     .catch((error) => {
+//       console.error("There was a problem adding the new blog post:", error);
+//     });
+// }
+
+// // Example usage:
+// const newPostData = {
+//   title: "New Blog Post Title",
+//   body: "This is the content of the new blog post.",
+//   userId: 1,
+// };
+
+// addNewBlogPost(newPostData).then(() => {
+//   console.log("New blog post added successfully!");
+// });
