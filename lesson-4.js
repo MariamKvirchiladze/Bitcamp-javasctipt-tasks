@@ -511,3 +511,75 @@ const crypto = require("crypto");
 // };
 // person.job = "Mentor";
 // console.log(person);
+// დაწერეთ პროგრამა, რომელიც:
+
+// მოუწოდებს მომხმარებელს, აირჩიოს თამაშის დონე, . თუ მომხმარებელი არ ჩაწერს 1, 2 ან 3-ს, პროგრამამ იგივე შეკითხვა კვლავ უნდა დასვას.
+
+// შემთხვევითობის პრინციპით წარმოქმნის ათ (10) მათემატიკურ ამოცანას, ფორმატირებულს, როგორც X + Y = , სადაც თითოეული X და Y არის დადებითი მთელი რიცხვი.
+// სთხოვს მომხმარებელს, გადაჭრას თითოეული ეს პრობლემა. თუ პასუხი არ არის სწორი (ან საერთოდ, რიცხვი არაა), პროგრამამ უნდა დაწეროს EEE და კვლავ იგივე ამოცანა დაუბეჭდოს მომხმარებელს, რაც მომხმარებელს საშუალებას მისცემს, ამ პრობლემის გადასაჭრელად სულ სამი ცდა გამოიყენოს. თუ მომხმარებელი სწორ პასუხს სამი ცდის შემდეგაც ვერ დაწერს, პროგრამამ სწორი პასუხი თვითონ უნდა დაუწეროს.
+
+// საბოლოო ჯამში, პროგრამამ უნდა დაბეჭდოს მომხმარებლის ქულა: სწორი პასუხების რაოდენობა 10-დან.
+
+function chooseLevel() {
+  let level;
+  do {
+    level = Number(prompt("Enter the level: "));
+  } while (level < 1 || level > 3 || isNaN(level));
+  switch (level) {
+    case 1:
+      level = "10";
+      break;
+    case 2:
+      level = "100";
+      break;
+    case 3:
+      level = "1000";
+      break;
+  }
+  return level;
+}
+const generateRandomNumber = (level) => Math.floor(Math.random() * level);
+function generateOperator() {
+  return Math.random() < 0.5 ? "+" : "-";
+}
+function generateMathProblem(level) {
+  let x = generateRandomNumber(level);
+  let y = generateRandomNumber(level);
+  let operator = generateOperator();
+  if (operator === "-" && x < y) {
+    [x, y] = [y, x];
+  }
+  return [x, y, operator];
+}
+
+function main() {
+  let userResult;
+  let wrongCounter = 0;
+  let level = chooseLevel();
+  let numProblems = parseInt(
+    prompt("How many problems do you want to solve? ")
+  );
+  let score = 0;
+
+  for (let i = 0; i < numProblems; i++) {
+    let [x, y, operator] = generateMathProblem(level);
+    let correctAnswer = operator === "+" ? x + y : x - y;
+
+    do {
+      userResult = Number(prompt(`${x} ${operator} ${y} = `));
+      if (userResult !== correctAnswer) {
+        console.log("EEE");
+        wrongCounter++;
+        if (wrongCounter === 3) {
+          console.log(`${x} + ${y} = ${correctAnswer}`);
+          break;
+        }
+      } else {
+        score++;
+      }
+    } while (userResult !== correctAnswer);
+    console.log(userResult);
+  }
+  console.log("Your score: " + score);
+}
+main();
