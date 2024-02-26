@@ -218,3 +218,32 @@
 // };
 
 // updateContactDetails(contactId, updatedData);
+
+// Create a Note: Implement a function to create a new note on the server using Fetch API, sending the note content.
+function createNote(noteContent) {
+  const apiUrl = "https://jsonplaceholder.typicode.com/users/"; // Intentionally incorrect URL
+
+  const requestOptions = {
+    method: "POST",
+    body: noteContent,
+    userId: 1,
+  };
+
+  fetch(apiUrl, requestOptions)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Failed to create note", response);
+      }
+      return response.json();
+    })
+    .then(() => {
+      console.log("Note created successfully:", noteContent);
+    })
+    .catch((error) => {
+      console.error("Error creating note:", error.message);
+    });
+}
+
+// Example usage:
+const noteContent = "This is a new note content.";
+createNote(noteContent);
