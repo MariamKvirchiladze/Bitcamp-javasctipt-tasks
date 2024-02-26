@@ -146,37 +146,75 @@
 // });
 
 // Delete Product from Inventory: Write a function that uses Fetch API to delete a specific product from the inventory by sending a DELETE request.
-async function deleteProductFromInventory(productId) {
-  const apiUrl = `https://jsonplaceholder.typicode.com/posts/${productId}`;
+// async function deleteProductFromInventory(productId) {
+//   const apiUrl = `https://jsonplaceholder.typicode.com/posts/${productId}`;
 
-  try {
-    // Fetch the current product data
-    const responseBefore = await fetch(apiUrl);
-    const productBefore = await responseBefore.json();
-    console.log("Product Before Delete:", productBefore);
+//   try {
+//     // Fetch the current product data
+//     const responseBefore = await fetch(apiUrl);
+//     const productBefore = await responseBefore.json();
+//     console.log("Product Before Delete:", productBefore);
 
-    // Make DELETE request to remove the product
-    const responseDelete = await fetch(apiUrl, {
-      method: "DELETE",
-    });
+//     // Make DELETE request to remove the product
+//     const responseDelete = await fetch(apiUrl, {
+//       method: "DELETE",
+//     });
 
-    if (!responseDelete.ok) {
-      throw new Error("Failed to delete product");
-    }
+//     if (!responseDelete.ok) {
+//       throw new Error("Failed to delete product");
+//     }
 
-    console.log("Product Deleted Successfully.");
+//     console.log("Product Deleted Successfully.");
 
-    // Fetching the deleted product should now result in a 404 error
-    const responseAfter = await fetch(apiUrl);
-    if (responseAfter.status === 404) {
-      console.log("Product has been successfully deleted.");
-    } else {
-      console.log("Error: Product still exists after deletion.");
-    }
-  } catch (error) {
-    console.error("Error deleting product:", error.message);
-  }
-}
+//     // Fetching the deleted product should now result in a 404 error
+//     const responseAfter = await fetch(apiUrl);
+//     if (responseAfter.status === 404) {
+//       console.log("Product has been successfully deleted.");
+//     } else {
+//       console.log("Error: Product still exists after deletion.");
+//     }
+//   } catch (error) {
+//     console.error("Error deleting product:", error.message);
+//   }
+// }
 
-// Example usage: Delete product with ID '1'
-deleteProductFromInventory(1);
+// // Example usage: Delete product with ID '1'
+// deleteProductFromInventory(1);
+
+// Update Contact Details: Create a function to update contact details on the server using Fetch API, sending the updated data for a specific contact.
+
+// function updateContactDetails(contactId, updatedData) {
+//   const apiUrl = "https://jsonplaceholder.typicode.com/users/" + contactId; // JSONPlaceholder endpoint for updating user details
+
+//   const requestOptions = {
+//     method: "PUT",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify(updatedData),
+//   };
+
+//   fetch(apiUrl, requestOptions)
+//     .then((response) => {
+//       if (!response.ok) {
+//         throw new Error("Failed to update contact details");
+//       }
+//       return response.json();
+//     })
+//     .then((data) => {
+//       console.log("Contact details updated successfully:", data);
+//     })
+//     .catch((error) => {
+//       console.error("Error updating contact details:", error.message);
+//     });
+// }
+
+// // Example usage:
+// const contactId = 1; // Using contact ID 1 for testing purposes
+// const updatedData = {
+//   name: "Updated Name",
+//   email: "updated@example.com",
+//   phone: "123-456-7890",
+// };
+
+// updateContactDetails(contactId, updatedData);
