@@ -520,66 +520,66 @@ const crypto = require("crypto");
 
 // საბოლოო ჯამში, პროგრამამ უნდა დაბეჭდოს მომხმარებლის ქულა: სწორი პასუხების რაოდენობა 10-დან.
 
-function chooseLevel() {
-  let level;
-  do {
-    level = Number(prompt("Enter the level: "));
-  } while (level < 1 || level > 3 || isNaN(level));
-  switch (level) {
-    case 1:
-      level = "10";
-      break;
-    case 2:
-      level = "100";
-      break;
-    case 3:
-      level = "1000";
-      break;
-  }
-  return level;
-}
-const generateRandomNumber = (level) => Math.floor(Math.random() * level);
-function generateOperator() {
-  return Math.random() < 0.5 ? "+" : "-";
-}
-function generateMathProblem(level) {
-  let x = generateRandomNumber(level);
-  let y = generateRandomNumber(level);
-  let operator = generateOperator();
-  if (operator === "-" && x < y) {
-    [x, y] = [y, x];
-  }
-  return [x, y, operator];
-}
+// function chooseLevel() {
+//   let level;
+//   do {
+//     level = Number(prompt("Enter the level: "));
+//   } while (level < 1 || level > 3 || isNaN(level));
+//   switch (level) {
+//     case 1:
+//       level = "10";
+//       break;
+//     case 2:
+//       level = "100";
+//       break;
+//     case 3:
+//       level = "1000";
+//       break;
+//   }
+//   return level;
+// }
+// const generateRandomNumber = (level) => Math.floor(Math.random() * level);
+// function generateOperator() {
+//   return Math.random() < 0.5 ? "+" : "-";
+// }
+// function generateMathProblem(level) {
+//   let x = generateRandomNumber(level);
+//   let y = generateRandomNumber(level);
+//   let operator = generateOperator();
+//   if (operator === "-" && x < y) {
+//     [x, y] = [y, x];
+//   }
+//   return [x, y, operator];
+// }
 
-function main() {
-  let userResult;
-  let wrongCounter = 0;
-  let level = chooseLevel();
-  let numProblems = parseInt(
-    prompt("How many problems do you want to solve? ")
-  );
-  let score = 0;
+// function main() {
+//   let userResult;
+//   let wrongCounter = 0;
+//   let level = chooseLevel();
+//   let numProblems = parseInt(
+//     prompt("How many problems do you want to solve? ")
+//   );
+//   let score = 0;
 
-  for (let i = 0; i < numProblems; i++) {
-    let [x, y, operator] = generateMathProblem(level);
-    let correctAnswer = operator === "+" ? x + y : x - y;
+//   for (let i = 0; i < numProblems; i++) {
+//     let [x, y, operator] = generateMathProblem(level);
+//     let correctAnswer = operator === "+" ? x + y : x - y;
 
-    do {
-      userResult = Number(prompt(`${x} ${operator} ${y} = `));
-      if (userResult !== correctAnswer) {
-        console.log("EEE");
-        wrongCounter++;
-        if (wrongCounter === 3) {
-          console.log(`${x} + ${y} = ${correctAnswer}`);
-          break;
-        }
-      } else {
-        score++;
-      }
-    } while (userResult !== correctAnswer);
-    console.log(userResult);
-  }
-  console.log("Your score: " + score);
-}
-main();
+//     do {
+//       userResult = Number(prompt(`${x} ${operator} ${y} = `));
+//       if (userResult !== correctAnswer) {
+//         console.log("EEE");
+//         wrongCounter++;
+//         if (wrongCounter === 3) {
+//           console.log(`${x} + ${y} = ${correctAnswer}`);
+//           break;
+//         }
+//       } else {
+//         score++;
+//       }
+//     } while (userResult !== correctAnswer);
+//     console.log(userResult);
+//   }
+//   console.log("Your score: " + score);
+// }
+// main();

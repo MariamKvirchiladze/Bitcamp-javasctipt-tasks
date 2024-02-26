@@ -144,3 +144,39 @@
 // addNewBlogPost(newPostData).then(() => {
 //   console.log("New blog post added successfully!");
 // });
+
+// Delete Product from Inventory: Write a function that uses Fetch API to delete a specific product from the inventory by sending a DELETE request.
+async function deleteProductFromInventory(productId) {
+  const apiUrl = `https://jsonplaceholder.typicode.com/posts/${productId}`;
+
+  try {
+    // Fetch the current product data
+    const responseBefore = await fetch(apiUrl);
+    const productBefore = await responseBefore.json();
+    console.log("Product Before Delete:", productBefore);
+
+    // Make DELETE request to remove the product
+    const responseDelete = await fetch(apiUrl, {
+      method: "DELETE",
+    });
+
+    if (!responseDelete.ok) {
+      throw new Error("Failed to delete product");
+    }
+
+    console.log("Product Deleted Successfully.");
+
+    // Fetching the deleted product should now result in a 404 error
+    const responseAfter = await fetch(apiUrl);
+    if (responseAfter.status === 404) {
+      console.log("Product has been successfully deleted.");
+    } else {
+      console.log("Error: Product still exists after deletion.");
+    }
+  } catch (error) {
+    console.error("Error deleting product:", error.message);
+  }
+}
+
+// Example usage: Delete product with ID '1'
+deleteProductFromInventory(1);
